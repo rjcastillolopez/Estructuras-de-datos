@@ -33,7 +33,7 @@ public:
     void remove(T data);                // Remove the first matching value from the list.
     void pop(int index);                // Delete an element at a particular index.
     void reverse();                     // Reverse the list.
-    void del();                         // Delete the list.
+    void del();                         // Delete the list (Destructor).
     void printList();                   // Print the list.
 };
 
@@ -42,7 +42,7 @@ public:
 // Constructor:
 template <class T>
 LinkedList<T>::LinkedList() {
-    this->head = NULL;
+    this->head = nullptr;
     this->curr_size = 0;
 }
 
@@ -65,7 +65,7 @@ T LinkedList<T>::get(int index) {
             }
             Node<T>* aux = this->head;
             int pos = 0;
-            while (aux != NULL) {
+            while (aux != nullptr) {
                 if (pos == index) {
                     return aux->data;
                 }
@@ -90,11 +90,11 @@ template <class T>
 int LinkedList<T>::index(T data) {
     Node<T>* aux = this->head;
     int index = 0;
-    while (aux != NULL && aux->data != data) {
+    while (aux != nullptr && aux->data != data) {
         aux = aux->next;
         index++;
     }
-    if (aux == NULL) {
+    if (aux == nullptr) {
         return -1;
     }
     else {
@@ -117,13 +117,13 @@ template <class T>
 void LinkedList<T>::append(T data) {
     Node<T>* new_node = new Node<T>;
     new_node->data = data;
-    new_node->next = NULL;
-    if (this->head == NULL) {
+    new_node->next = nullptr;
+    if (this->head == nullptr) {
         this->head = new_node;
     }
     else {
         Node<T>* aux = this->head;
-        while (aux->next != NULL) {
+        while (aux->next != nullptr) {
             aux = aux->next;
         }
         aux->next = new_node;
@@ -148,7 +148,7 @@ void LinkedList<T>::insert(int index, T data) {
             else {
                 Node<T>* aux = this->head;
                 int pos = 1;
-                while (aux->next != NULL && pos != index) {
+                while (aux->next != nullptr && pos != index) {
                     aux = aux->next;
                     pos++;
                 }
@@ -176,7 +176,7 @@ void LinkedList<T>::remove(T data) {
             }
             else {
                 Node<T>* aux = this->head;
-                while (aux->next != NULL) {
+                while (aux->next != nullptr) {
                     if (aux->next->data == data) {
                         Node<T>* temp = aux->next;
                         aux->next = aux->next->next;
@@ -208,7 +208,7 @@ void LinkedList<T>::pop(int index) {
             else {
                 Node<T>* aux = this->head;
                 int pos = 1;
-                while (aux->next != NULL) {
+                while (aux->next != nullptr) {
                     if (pos == index) {
                         Node<T>* temp = aux->next;
                         aux->next = aux->next->next;
@@ -231,9 +231,9 @@ void LinkedList<T>::pop(int index) {
 template <class T>
 void LinkedList<T>::reverse() {
     Node<T>* aux = this->head;
-    Node<T>* temp = NULL;
-    Node<T>* inv = NULL;
-    while (aux != NULL) {
+    Node<T>* temp = nullptr;
+    Node<T>* inv = nullptr;
+    while (aux != nullptr) {
         Node<T>* new_node = new Node<T>;
         new_node->data = aux->data;
         new_node->next = inv;
@@ -249,13 +249,13 @@ void LinkedList<T>::reverse() {
 template <class T>
 void LinkedList<T>::del() {
     Node<T>* aux = this->head;
-    Node<T>* temp = NULL;
-    while (aux != NULL) {
+    Node<T>* temp = nullptr;
+    while (aux != nullptr) {
         temp = aux->next;
         free(aux);
         aux = temp;
     }
-    this->head = NULL;
+    this->head = nullptr;
     this->curr_size = 0;
 }
 
@@ -263,7 +263,7 @@ void LinkedList<T>::del() {
 template <class T>
 void LinkedList<T>::printList() {
     Node<T>* aux = this->head;
-    while (aux != NULL) {
+    while (aux != nullptr) {
         std::cout << aux->data << " ";
         aux = aux->next;
     }
