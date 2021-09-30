@@ -1,6 +1,6 @@
-#include "LinkedList.h"
+#include "Test.h"
 
 int main() {
-	// Empty list:
-	LinkedList<std::string> list;
+	LinkedListTest();
+	return 0;
 }
