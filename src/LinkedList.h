@@ -1,3 +1,5 @@
+// Author: Ricardo J. Castillo López
+
 #pragma once
 #ifndef LINKEDLIST_H 
 
