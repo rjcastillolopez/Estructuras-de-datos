@@ -195,17 +195,19 @@ void LinkedList<T>::remove(T data) {
                 free(temp);
             }
             else {
+                bool del = false;
                 Node<T>* aux = this->head;
                 while (aux->next != nullptr) {
                     if (aux->next->data == data) {
                         temp = aux->next;
                         aux->next = aux->next->next;
                         free(temp);
+                        del = true;
                         break;
                     }
                     aux = aux->next;
                 }
-                if (aux->next == nullptr) {
+                if (!del) {
                     throw "Element not found";
                 }
             }
