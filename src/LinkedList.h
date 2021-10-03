@@ -100,7 +100,7 @@ int LinkedList<T>::index(T data) {
         index++;
     }
     if (aux == nullptr) {
-        return -1;
+        return -1; // Element not found.
     }
     else {
         return index;
@@ -203,6 +203,9 @@ void LinkedList<T>::remove(T data) {
                         break;
                     }
                     aux = aux->next;
+                }
+                if (aux->next == nullptr) {
+                    throw "Element not found";
                 }
             }
             this->curr_size--;
