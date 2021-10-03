@@ -70,13 +70,11 @@ T LinkedList<T>::get(int index) {
         else {
             Node<T> *aux = this->head;
             int pos = 0;
-            while (aux != nullptr) {
-                if (pos == index) {
-                    return aux->data;
-                }
+            while (pos != index) {
                 aux = aux->next;
                 pos++;
             }
+            return aux->data;
         }
     }
     catch (const char *msg) {
