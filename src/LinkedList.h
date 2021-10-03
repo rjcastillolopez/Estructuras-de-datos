@@ -11,14 +11,14 @@ template <class T>
 class Node {
 public:
     T data;
-    Node<T> *next;
+    Node<T>* next;
 };
 
 // Linked list class template:
 template <class T>
 class LinkedList {
 private:
-    Node<T> *head;
+    Node<T>* head;
     int curr_size;
 public:
     // Constructor:
@@ -68,7 +68,7 @@ T LinkedList<T>::get(int index) {
             throw "Index out of range";
         }
         else {
-            Node<T> *aux = this->head;
+            Node<T>* aux = this->head;
             int pos = 0;
             while (pos != index) {
                 aux = aux->next;
@@ -77,7 +77,7 @@ T LinkedList<T>::get(int index) {
             return aux->data;
         }
     }
-    catch (const char *msg) {
+    catch (const char* msg) {
         std::cout << msg << std::endl;
     }
 
@@ -91,7 +91,7 @@ T LinkedList<T>::get(int index) {
 // Returns the index of the first element with the specified value:
 template <class T>
 int LinkedList<T>::index(T data) {
-    Node<T> *aux = this->head;
+    Node<T>* aux = this->head;
     int index = 0;
     while (aux != nullptr && aux->data != data) {
         aux = aux->next;
@@ -108,7 +108,7 @@ int LinkedList<T>::index(T data) {
 // Returns the number of elements (ocurrences) with the specified value:
 template <class T>
 int LinkedList<T>::count(T data) {
-    Node<T> *aux = this->head;
+    Node<T>* aux = this->head;
     int reps = 0;
     while (aux != nullptr) {
         if (aux->data == data) {
@@ -122,7 +122,7 @@ int LinkedList<T>::count(T data) {
 // Adds an element at the beggining of the list:
 template <class T>
 void LinkedList<T>::push(T data) {
-    Node<T> *new_node = new Node<T>;
+    Node<T>* new_node = new Node<T>;
     new_node->data = data;
     new_node->next = this->head;
     this->head = new_node;
@@ -132,14 +132,14 @@ void LinkedList<T>::push(T data) {
 // Adds an element at the end of the list:
 template <class T>
 void LinkedList<T>::append(T data) {
-    Node<T> *new_node = new Node<T>;
+    Node<T>* new_node = new Node<T>;
     new_node->data = data;
     new_node->next = nullptr;
     if (this->head == nullptr) {
         this->head = new_node;
     }
     else {
-        Node<T> *aux = this->head;
+        Node<T>* aux = this->head;
         while (aux->next != nullptr) {
             aux = aux->next;
         }
@@ -156,14 +156,14 @@ void LinkedList<T>::insert(int index, T data) {
             throw "Index out of range";
         }
         else {
-            Node<T> *new_node = new Node<T>;
+            Node<T>* new_node = new Node<T>;
             new_node->data = data;
             if (index == 0) {
                 new_node->next = this->head;
                 this->head = new_node;
             }
             else {
-                Node<T> *aux = this->head;
+                Node<T>* aux = this->head;
                 int pos = 1;
                 while (pos != index) {
                     aux = aux->next;
@@ -175,7 +175,7 @@ void LinkedList<T>::insert(int index, T data) {
             this->curr_size++;
         }
     }
-    catch (const char *msg) {
+    catch (const char* msg) {
         std::cout << msg << std::endl;
     }
 }
@@ -188,14 +188,17 @@ void LinkedList<T>::remove(T data) {
             throw "Empty list";
         }
         else {
+            Node<T>* temp;
             if (this->head->data == data) {
+                temp = this->head;
                 this->head = this->head->next;
+                free(temp);
             }
             else {
-                Node<T> *aux = this->head;
+                Node<T>* aux = this->head;
                 while (aux->next != nullptr) {
                     if (aux->next->data == data) {
-                        Node<T> *temp = aux->next;
+                        temp = aux->next;
                         aux->next = aux->next->next;
                         free(temp);
                         break;
@@ -209,7 +212,7 @@ void LinkedList<T>::remove(T data) {
             this->curr_size--;
         }
     }
-    catch (const char *msg) {
+    catch (const char* msg) {
         std::cout << msg << std::endl;
     }
 }
@@ -225,24 +228,27 @@ void LinkedList<T>::pop(int index) {
             throw "Index out of range";
         }
         else {
+            Node<T>* temp;
             if (index == 0) {
+                temp = this->head;
                 this->head = this->head->next;
+                free(temp);
             }
             else {
-                Node<T> *aux = this->head;
+                Node<T>* aux = this->head;
                 int pos = 1;
                 while (pos != index) {
                     aux = aux->next;
                     pos++;
                 }
-                Node<T> *temp = aux->next;
+                temp = aux->next;
                 aux->next = aux->next->next;
                 free(temp);
             }
             this->curr_size--;
         }
     }
-    catch (const char *msg) {
+    catch (const char* msg) {
         std::cout << msg << std::endl;
     }
 }
@@ -250,7 +256,7 @@ void LinkedList<T>::pop(int index) {
 // Removes duplicates of the list:
 template <class T>
 void LinkedList<T>::removeDuplicates() {
-    Node<T> *aux1 = this->head, *aux2;
+    Node<T>* aux1 = this->head, * aux2;
     int i, j;
     i = 0;
     while (aux1 != nullptr) {
@@ -258,7 +264,7 @@ void LinkedList<T>::removeDuplicates() {
         j = i+1;
         while (aux2 != nullptr) {
             if (aux2->data == aux1->data) {
-                Node<T> *temp = aux2->next;
+                Node<T>* temp = aux2->next;
                 this->pop(j);
                 aux2 = temp;
             }
@@ -292,7 +298,7 @@ void LinkedList<T>::update(int index, T data) {
             aux->data = data;
         }
     }
-    catch (const char *msg) {
+    catch (const char* msg) {
         std::cout << msg << std::endl;
     }
 }
@@ -300,11 +306,11 @@ void LinkedList<T>::update(int index, T data) {
 // Reverses the order of the list:
 template <class T>
 void LinkedList<T>::reverse() {
-    Node<T> *aux = this->head;
-    Node<T> *temp = nullptr;
-    Node<T> *inv = nullptr;
+    Node<T>* aux = this->head;
+    Node<T>* temp = nullptr;
+    Node<T>* inv = nullptr;
     while (aux != nullptr) {
-        Node<T> *new_node = new Node<T>;
+        Node<T>* new_node = new Node<T>;
         new_node->data = aux->data;
         new_node->next = inv;
         inv = new_node;
@@ -341,8 +347,8 @@ LinkedList<T> LinkedList<T>::copy() {
 // Removes all the elements from the list (Destructor):
 template <class T>
 void LinkedList<T>::clear() {
-    Node<T> *aux = this->head;
-    Node<T> *temp = nullptr;
+    Node<T>* aux = this->head;
+    Node<T>* temp = nullptr;
     while (aux != nullptr) {
         temp = aux->next;
         free(aux);
@@ -355,7 +361,7 @@ void LinkedList<T>::clear() {
 // Prints the list:
 template <class T>
 void LinkedList<T>::printList() {
-    Node<T> *aux = this->head;
+    Node<T>* aux = this->head;
     while (aux != nullptr) {
         std::cout << aux->data << " ";
         aux = aux->next;
